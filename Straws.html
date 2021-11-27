@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+  body {
+    font-family: "Times New Roman", Georgia, Serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display";
+    letter-spacing: 5px;
+  }
+
+  body {
+    padding: 0px;
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+
+  .dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    font-size: 14px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  canvas {
+    border: 1px solid black
+  }
+</style>
+
+<head></head>
+<!-- Navbar (sit on top) -->
+
+<head>
+  <title>The Final Straw</title>
+</head>
+
+<body>
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-padding w3-card" style="letter-spacing:4px;">
+      <a href="index.html" class="w3-bar-item w3-button">The Final Straws</a>
+      <!-- Right-sided navbar links. Hide them on small screen -->
+      <div class="w3-right">
+        <a href="About.html" class="w3-bar-item w3-button">About The Straws</a>
+      </div>
+    </div>
+  </div>
+  </br></br></br></br></br>
+
+  <h1 style="text-align:center;">Draw your Straws!</h1>
+  <div class="center">
+
+    <!--Draw canvas-->
+    <canvas id="myCanvas" width="1000" height="1000" style="border:1px solid #d3d3d3;"></canvas>
+
+    <!-- When Generate straws! button is clicked -->
+    <p id="straw" style="text-align:center;"></p>
+    <button id="straw" onclick="drawRect()"> Generate straws!</button>
+
+    <!--drawRect() that draws straws based on the information earned by user -->
+    <script>
+      function drawRect() {
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext('2d');
+        context.fillStyle = 'yellow';
+
+        xPos = 10;
+        yPos = 300;
+        height = 30;
+
+        if (randNumArray.length > 0 && randNumArray.length == input) {
+          for (let i = 0; i < randNumArray.length; i++) {
+            context.fillRect(xPos, yPos, randNumArray[i] * 10, height);
+            yPos += 50;
+          }
+        } else {
+          alert("You should generate right amount of random numbers to generate straws!");
+        }
+      }
+    </script>
+
+    <script>
+      // dark-mode function  
+      function myFunction() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+      }
+    </script>
+
+    <p id="number" style="text-align:center;"></p>
+    <p id="array" style="text-align:center;"></p>
+    <p style="text-align:center;"> <button id="b" onclick="random();"> number generator</button> </p>
+
+
+    <!-- random() that generates random number-->
+    <script>
+      countRandGenerated = 0;
+      randNumArray = [];
+      function random() {
+        // generate a random number between 1-100
+        varx = Math.floor(Math.random() * 100 + 1);
+
+        // document.getElementById("number").innerHTML = "Number you randomly got : " + varx;
+        randNumArray[countRandGenerated] = varx;
+        document.getElementById("array").innerHTML = "List of random numbers you got : " + randNumArray;
+        countRandGenerated += 1;
+      }
+    </script>
+
+    <div>
+      <form id='straws' style="text-align:center;" onsubmit="return false">
+
+        <div class='strawnum'>
+
+          <label id='Lable' for='Field'># of straws:</label>
+
+          <input id='Field' type='number' maxlength='25'></input>
+          <input type="submit" onclick="saveAmount()">
+
+          <p id="numStraws" style="text-align:center;"></p>
+
+          <!-- saveAmount() that saves and dispaly the user input of amount of straws -->
+          <script>
+            function saveAmount() {
+              input = document.getElementById("Field").value;
+              // alert(input);
+              if (input < 1) {
+                document.getElementById("numStraws").innerHTML = "Enter an amount that is greater than 0.";
+              } else {
+                document.getElementById("numStraws").innerHTML = "You want to generate " + input + " straw(s).";
+              }
+            }
+          </script>
+        </div>
+      </form>
+
+      <p><button onclick="myFunction()">Toggle dark mode</button></p>
+
+    </div>
+  </div>
+</body>
+
+</html>
